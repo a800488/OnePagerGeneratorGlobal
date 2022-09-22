@@ -117,6 +117,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 									label="Why You"
 									placeholder="Tell something about yourself"
 									multiline
+									maxRows={5}
 								/>
 							</Grid>
 							<Grid item xs={12} sm={5}>
@@ -138,6 +139,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 									label="Your core competencies "
 									placeholder="What are your core competencies?"
 									multiline
+									maxRows={5}
 								/>
 							</Grid>
 
@@ -160,6 +162,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 									label="Your education"
 									placeholder="What is your education?"
 									multiline
+									maxRows={5}
 								/>
 							</Grid>
 
@@ -182,6 +185,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 									label="Your relevant experience "
 									placeholder="What is your experience relevant to project?"
 									multiline
+									maxRows={5}
 								/>
 							</Grid>
 							<Grid item xs={12} sm={5}>
@@ -203,6 +207,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 									label="Your soft skills "
 									placeholder="What are your softskills?"
 									multiline
+									maxRows={5}
 								/>
 							</Grid>
 							<Grid item xs={12} sm={5}>
@@ -224,6 +229,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 									label="Languages that you know"
 									placeholder="What languages do you know?"
 									multiline
+									maxRows={5}
 								/>
 							</Grid>
 						</Grid>

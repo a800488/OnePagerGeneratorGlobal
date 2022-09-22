@@ -1,7 +1,7 @@
 import Paper from "@mui/material/Paper";
 import "../styles/RenderedForm.css";
 import removeAccents from "remove-accents";
-import { Button, Grid, Stack, Typography, Container } from "@mui/material";
+import { Button, Grid, Typography, Container } from "@mui/material";
 import { ionSave } from "../App";
 import Tile from "./Tile";
 import jsPDF from "jspdf";
@@ -11,7 +11,6 @@ const generatePDF = () => {
 	const domElement = document.getElementById("OnePagerResult")!;
 	const pdf = new jsPDF({
 		orientation: "landscape",
-		unit: "px",
 		hotfixes: ["px_scaling"], //check this
 		format: "a4",
 	});
@@ -24,9 +23,9 @@ const generatePDF = () => {
 			pdf.save(`${new Date().toISOString()}.pdf`);
 		},
 		html2canvas: {
-			windowHeight: 210,
+			windowHeight: 840,
 			windowWidth: 1200,
-			height: 210,
+			height: 840,
 			width: 1200,
 			scale: 0.25,
 		},
@@ -87,6 +86,7 @@ const RenderedForm = ({
 		<Container
 			maxWidth="xl"
 			sx={{
+				height: "100%",
 				maxHeight: 840,
 				mb: 4,
 			}}
@@ -96,24 +96,32 @@ const RenderedForm = ({
 				sx={{
 					borderRadius: 0,
 					backgroundColor: "white",
+					boxShadow: "none",
 					color: "black",
 					height: "100%",
 					display: "flex",
 					flexDirection: "column",
+					maxWidth: "xl",
+					width: "100%",
 				}}
 			>
 				<Grid container gap={2} alignItems="center">
 					<OutputAvatar croppedArea={croppedArea} image={image} />
-					<Grid item xs={4} container direction={"column"}>
+					<Grid item xs={10} container direction={"column"}>
 						<Typography variant="h2">
-							{removeAccents.remove(name)} {removeAccents.remove(surname)}
+							{removeAccents.remove(name) + " " + removeAccents.remove(surname)}
 						</Typography>
 						<Typography color="rgb(5, 150, 255)" variant="h4">
 							{removeAccents.remove(role)}
 						</Typography>
 					</Grid>
 				</Grid>
-				<Grid container gap={2} justifyContent="space-between">
+				<Grid
+					container
+					gap={2}
+					justifyContent="space-between"
+					sx={{ borderTop: 4, borderTopColor: "#1565C0", fontSize: 12 }}
+				>
 					<Tile
 						title={"Why " + removeAccents.remove(name) + "?"}
 						display={fieldsToInclude[0]}
@@ -147,7 +155,17 @@ const RenderedForm = ({
 						/>
 					</Grid>
 				</Grid>
+				<Typography
+					sx={{ borderTop: 4, borderTopColor: "#1565C0", fontSize: 12 }}
+				>
+					Atos helps you realize your future-proof efficiency, agility and
+					improved topline. Our key to success is coupling the right strategy,
+					process design and innovation with IT. We are motivated to work with
+					you and your staff to achieve this challenge. Our clients view us as
+					leaders in commitment to implementation.
+				</Typography>
 			</Paper>
+
 			<Button
 				fullWidth
 				variant="contained"
