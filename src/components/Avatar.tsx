@@ -72,7 +72,13 @@ const AvatarEdit = ({ getAvatar }: iAvatarEdit) => {
 					classes={{ root: "slider" }}
 				/>
 			</Grid>
-			<Grid {...getRootProps()} position={"relative"} item xs={12}>
+			<Grid
+				{...getRootProps()}
+				position={"relative"}
+				item
+				xs={12}
+				style={{ cursor: "pointer" }}
+			>
 				<Paper>
 					<input {...getInputProps()} />
 

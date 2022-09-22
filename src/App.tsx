@@ -76,7 +76,7 @@ const App = () => {
 			<CssBaseline />
 			<Header />
 
-			<Container component="main" maxWidth={false} sx={{ mb: 4 }}>
+			<Container component="main" sx={{ mb: 4 }}>
 				<UserForm onSave={onSave} />
 
 				<RenderedForm

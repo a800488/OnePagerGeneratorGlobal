@@ -49,9 +49,8 @@ const UserForm = ({ onSave }: iUserForm) => {
 	};
 
 	return (
-		<Container component="main" maxWidth={false} sx={{ mb: 4 }}>
+		<Container component="main" maxWidth="xl" sx={{ mb: 4 }}>
 			<Grid
-				className="hello"
 				container
 				spacing={1}
 				sx={{
@@ -61,7 +60,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 				gap={2}
 			>
 				<Grid container spacing={2} gap={2} justifyContent="center">
-					<Grid container md={7}>
+					<Grid container md={7} item>
 						<Grid item xs={12} sx={{ mb: 0, mt: 0 }}>
 							<TextField
 								fullWidth
@@ -97,6 +96,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 							xs={12}
 							gap={2}
 							justifyContent="center"
+							item
 						>
 							<Grid item xs={12} sm={5}>
 								<FormControlLabel
@@ -228,7 +228,7 @@ const UserForm = ({ onSave }: iUserForm) => {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid container md={4}>
+					<Grid container md={4} item>
 						<AvatarEdit getAvatar={getAvatar} />
 					</Grid>
 				</Grid>

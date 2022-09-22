@@ -9,14 +9,13 @@ interface iTile {
 }
 
 const Item = styled(Paper)(({ theme }) => ({
-	backgroundColor: "rgb(0, 0, 0)",
 	...theme.typography.body2,
 	padding: theme.spacing(1),
 	textAlign: "left",
 	boxShadow: "none",
-	color: "white",
 	overflowWrap: "break-word",
 	fontSize: "10px",
+	width: "45%",
 }));
 
 const Tile = ({ content, title, display }: iTile) => {
