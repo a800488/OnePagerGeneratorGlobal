@@ -68,20 +68,7 @@ const OutputAvatar = ({ croppedArea, image }: any) => {
 	);
 };
 
-const RenderedForm = ({
-	name,
-	surname,
-	why,
-	education,
-	core,
-	relevant,
-	role,
-	softSkills,
-	languages,
-	fieldsToInclude,
-	croppedArea,
-	image,
-}: ionSave) => {
+const RenderedForm = ({ state, croppedArea, image }: any) => {
 	return (
 		<Container
 			maxWidth="xl"
@@ -95,12 +82,15 @@ const RenderedForm = ({
 				id={"OnePagerResult"}
 				sx={{
 					borderRadius: 0,
+					border: 1,
+					borderColor: "lightgray",
 					backgroundColor: "white",
 					boxShadow: "none",
 					color: "black",
 					height: "100%",
 					display: "flex",
 					flexDirection: "column",
+					padding: 2,
 					maxWidth: "xl",
 					width: "100%",
 				}}
@@ -142,7 +132,7 @@ const RenderedForm = ({
 						display={fieldsToInclude[3]}
 						content={removeAccents.remove(relevant)}
 					/>
-					<Grid container xs={6}>
+					<Grid container xs={6} item>
 						<Tile
 							title={"Soft Skills"}
 							display={fieldsToInclude[4]}

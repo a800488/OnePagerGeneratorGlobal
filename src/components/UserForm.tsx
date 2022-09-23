@@ -22,7 +22,7 @@ interface iUserForm {
 	}: ionSave) => void;
 }
 
-const UserForm = ({ onSave }: iUserForm) => {
+const UserForm = ({ updateText, state, includeField }: any) => {
 	const [name, setName] = useState<any>("");
 	const [surname, setSurname] = useState<any>("");
 	const [why, setWhy] = useState<string>("");
@@ -62,33 +62,19 @@ const UserForm = ({ onSave }: iUserForm) => {
 				<Grid container spacing={2} gap={2} justifyContent="center">
 					<Grid container md={7} item>
 						<Grid item xs={12} sx={{ mb: 0, mt: 0 }}>
-							<TextField
-								fullWidth
-								margin="normal"
-								value={name}
-								onChange={(e) => setName(e.target.value)}
-								id="name"
-								label="Name"
-								variant="outlined"
-							/>
-							<TextField
-								fullWidth
-								margin="normal"
-								value={surname}
-								onChange={(e) => setSurname(e.target.value)}
-								id="surname"
-								label="Surname"
-								variant="outlined"
-							/>
-							<TextField
-								fullWidth
-								margin="normal"
-								value={role}
-								onChange={(e) => setRole(e.target.value)}
-								id="role"
-								label="Role"
-								variant="outlined"
-							/>
+							{state.personalDetails.map((el: any, i: string) => (
+								<TextField
+									fullWidth
+									margin="normal"
+									value={el.content}
+									key={el.id}
+									label={el.fieldName}
+									variant="outlined"
+									onChange={(e) =>
+										updateText(e.target.value, el.id, "personalDetails")
+									}
+								/>
+							))}
 						</Grid>
 						<Grid
 							container
@@ -98,140 +84,32 @@ const UserForm = ({ onSave }: iUserForm) => {
 							justifyContent="center"
 							item
 						>
-							<Grid item xs={12} sm={5}>
-								<FormControlLabel
-									control={
-										<Switch
-											id="includeWhy"
-											checked={includeWhy}
-											onChange={() => setIncludeWhy(!includeWhy)}
-										/>
-									}
-									label="Include in PDF"
-								/>
-								<TextField
-									fullWidth
-									value={why}
-									id="why"
-									onChange={(e) => setWhy(e.target.value)}
-									label="Why You"
-									placeholder="Tell something about yourself"
-									multiline
-									maxRows={5}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={5}>
-								<FormControlLabel
-									control={
-										<Switch
-											id="includeCore"
-											checked={includeCore}
-											onChange={() => setIncludeCore(!includeCore)}
-										/>
-									}
-									label="Include in PDF"
-								/>
-								<TextField
-									fullWidth
-									value={core}
-									id="core"
-									onChange={(e) => setCore(e.target.value)}
-									label="Your core competencies "
-									placeholder="What are your core competencies?"
-									multiline
-									maxRows={5}
-								/>
-							</Grid>
-
-							<Grid item xs={12} sm={5}>
-								<FormControlLabel
-									control={
-										<Switch
-											id="includeEducation"
-											checked={includeEducation}
-											onChange={() => setIncludeEducation(!includeEducation)}
-										/>
-									}
-									label="Include in PDF"
-								/>
-								<TextField
-									fullWidth
-									value={education}
-									id="education"
-									onChange={(e) => setEducation(e.target.value)}
-									label="Your education"
-									placeholder="What is your education?"
-									multiline
-									maxRows={5}
-								/>
-							</Grid>
-
-							<Grid item xs={12} sm={5}>
-								<FormControlLabel
-									control={
-										<Switch
-											id="includeRelevant"
-											checked={includeRelevant}
-											onChange={() => setIncludeRelevant(!includeRelevant)}
-										/>
-									}
-									label="Include in PDF"
-								/>
-								<TextField
-									fullWidth
-									value={relevant}
-									id="relevant"
-									onChange={(e) => setRelevant(e.target.value)}
-									label="Your relevant experience "
-									placeholder="What is your experience relevant to project?"
-									multiline
-									maxRows={5}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={5}>
-								<FormControlLabel
-									control={
-										<Switch
-											id="includeSoftSkills"
-											checked={includeSoftSkills}
-											onChange={() => setIncludeSoftSkills(!includeSoftSkills)}
-										/>
-									}
-									label="Include in PDF"
-								/>
-								<TextField
-									fullWidth
-									value={softSkills}
-									id="relevant"
-									onChange={(e) => setSoftSkills(e.target.value)}
-									label="Your soft skills "
-									placeholder="What are your softskills?"
-									multiline
-									maxRows={5}
-								/>
-							</Grid>
-							<Grid item xs={12} sm={5}>
-								<FormControlLabel
-									control={
-										<Switch
-											id="includeLanguages"
-											checked={includeLanguages}
-											onChange={() => setIncludeLanguages(!includeLanguages)}
-										/>
-									}
-									label="Include in PDF"
-								/>
-								<TextField
-									fullWidth
-									value={languages}
-									id="relevant"
-									onChange={(e) => setLanguages(e.target.value)}
-									label="Languages that you know"
-									placeholder="What languages do you know?"
-									multiline
-									maxRows={5}
-								/>
-							</Grid>
+							{state.skills.map((el: any, i: number) => (
+								<Grid item xs={12} sm={5} key={i}>
+									<FormControlLabel
+										control={
+											<Switch
+												onChange={(e) =>
+													includeField(e.currentTarget, el.id, "skills")
+												}
+												checked={el.shouldInclude}
+											/>
+										}
+										label="Include in PDF"
+									/>
+									<TextField
+										fullWidth
+										value={el.content}
+										label={el.fieldName}
+										multiline
+										maxRows={5}
+										helperText={el.fieldName}
+										onChange={(e) =>
+											updateText(e.target.value, el.id, "skills")
+										}
+									/>
+								</Grid>
+							))}
 						</Grid>
 					</Grid>
 					<Grid container md={4} item>
@@ -243,29 +121,29 @@ const UserForm = ({ onSave }: iUserForm) => {
 				<Button
 					fullWidth
 					variant="contained"
-					onClick={() =>
-						onSave({
-							name,
-							surname,
-							why,
-							education,
-							core,
-							relevant,
-							role,
-							softSkills,
-							languages,
-							fieldsToInclude: [
-								includeWhy,
-								includeCore,
-								includeEducation,
-								includeRelevant,
-								includeSoftSkills,
-								includeLanguages,
-							],
-							croppedArea,
-							image,
-						})
-					}
+					// onClick={() =>
+					// 	onSave({
+					// 		name,
+					// 		surname,
+					// 		why,
+					// 		education,
+					// 		core,
+					// 		relevant,
+					// 		role,
+					// 		softSkills,
+					// 		languages,
+					// 		fieldsToInclude: [
+					// 			includeWhy,
+					// 			includeCore,
+					// 			includeEducation,
+					// 			includeRelevant,
+					// 			includeSoftSkills,
+					// 			includeLanguages,
+					// 		],
+					// 		croppedArea,
+					// 		image,
+					// 	})
+					// }
 				>
 					Display preview
 				</Button>

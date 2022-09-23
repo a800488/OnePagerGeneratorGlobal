@@ -6,6 +6,7 @@ import "./App.css";
 import UserForm from "./components/UserForm";
 import RenderedForm from "./components/RenderedForm";
 import Header from "./components/Header";
+import data from "./components/data";
 
 export interface ionSave {
 	name: string;
@@ -22,6 +23,7 @@ export interface ionSave {
 	image: any;
 }
 const App = () => {
+	const [state, setState] = useState(data);
 	const theme = createTheme();
 	const [name, setName] = useState<string>("");
 	const [surname, setSurname] = useState<string>("");
@@ -42,6 +44,26 @@ const App = () => {
 		true,
 		true,
 	]);
+
+	const updateText = (e: any, id: number, section: string) => {
+		let newState: any = state;
+		newState[section].forEach((el: any) => {
+			if (el.id === id) {
+				el.content = e;
+			}
+		});
+		setState({ ...newState });
+	};
+
+	const includeField = (e: any, id: number, section: string) => {
+		let newState: any = state;
+		newState[section].forEach((el: any) => {
+			if (el.id === id) {
+				el.shouldInclude = !el.shouldInclude;
+			}
+		});
+		setState({ ...newState });
+	};
 
 	const onSave = ({
 		name,
@@ -77,22 +99,13 @@ const App = () => {
 			<Header />
 
 			<Container component="main" sx={{ mb: 4 }}>
-				<UserForm onSave={onSave} />
-
-				<RenderedForm
-					name={name}
-					surname={surname}
-					why={why}
-					education={education}
-					core={core}
-					relevant={relevant}
-					role={role}
-					softSkills={softSkills}
-					languages={languages}
-					fieldsToInclude={fieldsToInclude}
-					croppedArea={croppedArea}
-					image={image}
+				<UserForm
+					updateText={updateText}
+					state={state}
+					includeField={includeField}
 				/>
+
+				<RenderedForm state={state} croppedArea={croppedArea} image={image} />
 			</Container>
 		</ThemeProvider>
 	);
