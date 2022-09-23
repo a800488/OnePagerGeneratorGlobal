@@ -60,7 +60,6 @@ const data = {
 			content: "",
 		},
 	],
-	image: "url",
 };
 
 export default data;

@@ -14,7 +14,7 @@ const Item = styled(Paper)(({ theme }) => ({
 	textAlign: "left",
 	boxShadow: "none",
 	overflowWrap: "break-word",
-	fontSize: "10px",
+	fontSize: "16px",
 	width: "45%",
 }));
 

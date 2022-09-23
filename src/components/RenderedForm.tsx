@@ -72,6 +72,9 @@ const RenderedForm = ({ state, croppedArea, image }: any) => {
 	let surname = state.personalDetails[1].content;
 	let role = state.personalDetails[2].content;
 
+	console.log(croppedArea);
+	console.log(image);
+
 	return (
 		<Container
 			maxWidth="xl"
@@ -120,6 +123,7 @@ const RenderedForm = ({ state, croppedArea, image }: any) => {
 							title={el.fieldName}
 							display={el.shouldInclude}
 							content={removeAccents.remove(el.content)}
+							key={i}
 						/>
 					))}
 				</Grid>

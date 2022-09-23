@@ -11,7 +11,7 @@ import data from "./components/data";
 const App = () => {
 	const [state, setState] = useState(data);
 	const theme = createTheme();
-	const [croppedArea, setcroppedArea] = useState<any>("");
+	const [croppedArea, setCroppedArea] = useState<any>("");
 	const [image, setImage] = useState<string>("");
 
 	const updateText = (e: any, id: number, section: string) => {
@@ -34,6 +34,11 @@ const App = () => {
 		setState({ ...newState });
 	};
 
+	const setAvatar = (croppedArea: any, image: any) => {
+		setCroppedArea(croppedArea);
+		setImage(image);
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
@@ -44,6 +49,7 @@ const App = () => {
 					updateText={updateText}
 					state={state}
 					includeField={includeField}
+					setAvatar={setAvatar}
 				/>
 
 				<RenderedForm state={state} croppedArea={croppedArea} image={image} />

@@ -1,20 +1,10 @@
 import { useState } from "react";
 import Container from "@mui/material/Container";
 import { FormControlLabel, Grid, TextField } from "@mui/material";
-
-import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import AvatarEdit from "./Avatar";
 
-const UserForm = ({ updateText, state, includeField }: any) => {
-	const [croppedArea, setcroppedArea] = useState<any>();
-	const [image, setImage] = useState<string>("");
-
-	const getAvatar = (croppedArea: any, image: string) => {
-		setcroppedArea(croppedArea);
-		setImage(image);
-	};
-
+const UserForm = ({ updateText, state, includeField, setAvatar }: any) => {
 	return (
 		<Container component="main" maxWidth="xl" sx={{ mb: 4 }}>
 			<Grid
@@ -80,7 +70,7 @@ const UserForm = ({ updateText, state, includeField }: any) => {
 						</Grid>
 					</Grid>
 					<Grid container md={4} item>
-						<AvatarEdit getAvatar={getAvatar} />
+						<AvatarEdit getAvatar={setAvatar} />
 					</Grid>
 				</Grid>
 			</Grid>
