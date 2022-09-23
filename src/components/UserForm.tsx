@@ -1,45 +1,12 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import Container from "@mui/material/Container";
 import { FormControlLabel, Grid, TextField } from "@mui/material";
 
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import AvatarEdit from "./Avatar";
-import { ionSave } from "../App";
-
-interface iUserForm {
-	onSave: ({
-		name,
-		surname,
-		why,
-		education,
-		core,
-		relevant,
-		role,
-		fieldsToInclude,
-		croppedArea,
-		image,
-	}: ionSave) => void;
-}
 
 const UserForm = ({ updateText, state, includeField }: any) => {
-	const [name, setName] = useState<any>("");
-	const [surname, setSurname] = useState<any>("");
-	const [why, setWhy] = useState<string>("");
-	const [education, setEducation] = useState<string>("");
-	const [core, setCore] = useState<string>("");
-	const [relevant, setRelevant] = useState<string>("");
-	const [role, setRole] = useState<string>("");
-	const [softSkills, setSoftSkills] = useState<string>("");
-	const [languages, setLanguages] = useState<string>("");
-
-	const [includeWhy, setIncludeWhy] = useState<boolean>(true);
-	const [includeCore, setIncludeCore] = useState<boolean>(true);
-	const [includeEducation, setIncludeEducation] = useState<boolean>(true);
-	const [includeRelevant, setIncludeRelevant] = useState<boolean>(true);
-	const [includeSoftSkills, setIncludeSoftSkills] = useState<boolean>(true);
-	const [includeLanguages, setIncludeLanguages] = useState<boolean>(true);
-
 	const [croppedArea, setcroppedArea] = useState<any>();
 	const [image, setImage] = useState<string>("");
 
@@ -116,37 +83,6 @@ const UserForm = ({ updateText, state, includeField }: any) => {
 						<AvatarEdit getAvatar={getAvatar} />
 					</Grid>
 				</Grid>
-			</Grid>
-			<Grid position={"relative"} item xs={12}>
-				<Button
-					fullWidth
-					variant="contained"
-					// onClick={() =>
-					// 	onSave({
-					// 		name,
-					// 		surname,
-					// 		why,
-					// 		education,
-					// 		core,
-					// 		relevant,
-					// 		role,
-					// 		softSkills,
-					// 		languages,
-					// 		fieldsToInclude: [
-					// 			includeWhy,
-					// 			includeCore,
-					// 			includeEducation,
-					// 			includeRelevant,
-					// 			includeSoftSkills,
-					// 			includeLanguages,
-					// 		],
-					// 		croppedArea,
-					// 		image,
-					// 	})
-					// }
-				>
-					Display preview
-				</Button>
 			</Grid>
 		</Container>
 	);

@@ -2,7 +2,6 @@ import Paper from "@mui/material/Paper";
 import "../styles/RenderedForm.css";
 import removeAccents from "remove-accents";
 import { Button, Grid, Typography, Container } from "@mui/material";
-import { ionSave } from "../App";
 import Tile from "./Tile";
 import jsPDF from "jspdf";
 import { font } from "../fonts/roboto";
@@ -11,7 +10,7 @@ const generatePDF = () => {
 	const domElement = document.getElementById("OnePagerResult")!;
 	const pdf = new jsPDF({
 		orientation: "landscape",
-		hotfixes: ["px_scaling"], //check this
+		hotfixes: ["px_scaling"],
 		format: "a4",
 	});
 
@@ -69,6 +68,10 @@ const OutputAvatar = ({ croppedArea, image }: any) => {
 };
 
 const RenderedForm = ({ state, croppedArea, image }: any) => {
+	let name = state.personalDetails[0].content;
+	let surname = state.personalDetails[1].content;
+	let role = state.personalDetails[2].content;
+
 	return (
 		<Container
 			maxWidth="xl"
@@ -112,38 +115,13 @@ const RenderedForm = ({ state, croppedArea, image }: any) => {
 					justifyContent="space-between"
 					sx={{ borderTop: 4, borderTopColor: "#1565C0", fontSize: 12 }}
 				>
-					<Tile
-						title={"Why " + removeAccents.remove(name) + "?"}
-						display={fieldsToInclude[0]}
-						content={removeAccents.remove(why)}
-					/>
-					<Tile
-						title={"Core competencies/Technologies"}
-						display={fieldsToInclude[2]}
-						content={removeAccents.remove(core)}
-					/>
-					<Tile
-						title={"Education, Trainings/Certification"}
-						display={fieldsToInclude[1]}
-						content={removeAccents.remove(education)}
-					/>
-					<Tile
-						title={"Relevant project experience"}
-						display={fieldsToInclude[3]}
-						content={removeAccents.remove(relevant)}
-					/>
-					<Grid container xs={6} item>
+					{state.skills.map((el: any, i: number) => (
 						<Tile
-							title={"Soft Skills"}
-							display={fieldsToInclude[4]}
-							content={removeAccents.remove(softSkills)}
+							title={el.fieldName}
+							display={el.shouldInclude}
+							content={removeAccents.remove(el.content)}
 						/>
-						<Tile
-							title={"Languages"}
-							display={fieldsToInclude[5]}
-							content={removeAccents.remove(languages)}
-						/>
-					</Grid>
+					))}
 				</Grid>
 				<Typography
 					sx={{ borderTop: 4, borderTopColor: "#1565C0", fontSize: 12 }}
