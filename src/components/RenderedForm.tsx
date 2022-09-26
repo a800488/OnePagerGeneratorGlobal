@@ -4,7 +4,6 @@ import removeAccents from "remove-accents";
 import { Button, Grid, Typography, Container } from "@mui/material";
 import Tile from "./Tile";
 import jsPDF from "jspdf";
-import { font } from "../fonts/roboto";
 
 const generatePDF = () => {
 	const domElement = document.getElementById("OnePagerResult")!;
@@ -16,15 +15,13 @@ const generatePDF = () => {
 
 	pdf.html(domElement, {
 		callback: function (pdf) {
-			pdf.addFileToVFS("Roboto-Regular-normal.ttf", font);
-			pdf.addFont("Roboto-Regular-normal.ttf", "Roboto-Regular", "normal");
 			pdf.setFont("Roboto-Regular");
 			pdf.save(`${new Date().toISOString()}.pdf`);
 		},
 		html2canvas: {
-			windowHeight: 840,
+			windowHeight: 800,
 			windowWidth: 1200,
-			height: 840,
+			height: 800,
 			width: 1200,
 			scale: 0.25,
 		},
@@ -68,12 +65,15 @@ const OutputAvatar = ({ croppedArea, image }: any) => {
 };
 
 const RenderedForm = ({ state, croppedArea, image }: any) => {
-	let name = state.personalDetails[0].content;
-	let surname = state.personalDetails[1].content;
-	let role = state.personalDetails[2].content;
-
-	console.log(croppedArea);
-	console.log(image);
+	let name = state.personalDetails.find(
+		(obj: { id: number }) => obj.id === 1
+	).content;
+	let surname = state.personalDetails.find(
+		(obj: { id: number }) => obj.id === 2
+	).content;
+	let role = state.personalDetails.find(
+		(obj: { id: number }) => obj.id === 3
+	).content;
 
 	return (
 		<Container
@@ -93,15 +93,22 @@ const RenderedForm = ({ state, croppedArea, image }: any) => {
 					backgroundColor: "white",
 					boxShadow: "none",
 					color: "black",
-					height: "100%",
+					height: "800px",
 					display: "flex",
 					flexDirection: "column",
+					justifyContent: "space-between",
 					padding: 2,
 					maxWidth: "xl",
 					width: "100%",
 				}}
 			>
-				<Grid container gap={2} alignItems="center">
+				<Grid
+					container
+					gap={2}
+					alignItems="center"
+					padding={2}
+					sx={{ borderBottom: 4, borderBottomColor: "#1565C0" }}
+				>
 					<OutputAvatar croppedArea={croppedArea} image={image} />
 					<Grid item xs={10} container direction={"column"}>
 						<Typography variant="h2">
@@ -115,8 +122,15 @@ const RenderedForm = ({ state, croppedArea, image }: any) => {
 				<Grid
 					container
 					gap={2}
-					justifyContent="space-between"
-					sx={{ borderTop: 4, borderTopColor: "#1565C0", fontSize: 12 }}
+					padding={2}
+					sx={{
+						fontSize: 12,
+						flexGrow: 1,
+						marginBottom: 1,
+						marginTop: 1,
+						maxHeight: 530,
+						overflow: "hidden",
+					}}
 				>
 					{state.skills.map((el: any, i: number) => (
 						<Tile
@@ -127,15 +141,25 @@ const RenderedForm = ({ state, croppedArea, image }: any) => {
 						/>
 					))}
 				</Grid>
-				<Typography
-					sx={{ borderTop: 4, borderTopColor: "#1565C0", fontSize: 12 }}
+				<Grid
+					padding={2}
+					sx={{
+						borderTop: 4,
+						borderTopColor: "#1565C0",
+					}}
 				>
-					Atos helps you realize your future-proof efficiency, agility and
-					improved topline. Our key to success is coupling the right strategy,
-					process design and innovation with IT. We are motivated to work with
-					you and your staff to achieve this challenge. Our clients view us as
-					leaders in commitment to implementation.
-				</Typography>
+					<Typography
+						sx={{
+							fontSize: 12,
+						}}
+					>
+						Atos helps you realize your future-proof efficiency, agility and
+						improved topline. Our key to success is coupling the right strategy,
+						process design and innovation with IT. We are motivated to work with
+						you and your staff to achieve this challenge. Our clients view us as
+						leaders in commitment to implementation.
+					</Typography>
+				</Grid>
 			</Paper>
 
 			<Button

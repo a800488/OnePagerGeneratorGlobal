@@ -1,20 +1,18 @@
 import { useState } from "react";
-import portriatPlaceholder from "./portraitPlaceholder.png";
+import portriatPlaceholder from "../images/portraitPlaceholder.png";
 import { useDropzone } from "react-dropzone";
 import Slider from "@mui/material/Slider";
 import Cropper from "react-easy-crop";
-import { Point, Area } from "react-easy-crop/types";
+import { Point } from "react-easy-crop/types";
 import { Grid } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import "../styles/Avatar.css";
-
-const CROP_AREA_ASPECT = 2 / 2;
 
 interface iAvatarEdit {
 	getAvatar: (croppedArea: any, image: any) => void;
 }
+
 const AvatarEdit = ({ getAvatar }: iAvatarEdit) => {
 	const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
 	const [zoom, setZoom] = useState(1);
@@ -48,7 +46,7 @@ const AvatarEdit = ({ getAvatar }: iAvatarEdit) => {
 							image={image}
 							crop={crop}
 							zoom={zoom}
-							aspect={CROP_AREA_ASPECT}
+							aspect={1}
 							onCropComplete={(croppedArea) => {
 								setCroppedArea(croppedArea);
 								getAvatar(croppedArea, image);

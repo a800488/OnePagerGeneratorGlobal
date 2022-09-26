@@ -1,6 +1,6 @@
 import Paper from "@mui/material/Paper";
 import "../styles/RenderedForm.css";
-import { styled, Typography } from "@mui/material";
+import { Grid, styled, Typography } from "@mui/material";
 
 interface iTile {
 	title: string;
@@ -10,12 +10,11 @@ interface iTile {
 
 const Item = styled(Paper)(({ theme }) => ({
 	...theme.typography.body2,
-	padding: theme.spacing(1),
 	textAlign: "left",
 	boxShadow: "none",
 	overflowWrap: "break-word",
-	fontSize: "16px",
-	width: "45%",
+	fontSize: "14px",
+	width: "100%",
 }));
 
 const Tile = ({ content, title, display }: iTile) => {
@@ -24,12 +23,12 @@ const Tile = ({ content, title, display }: iTile) => {
 	}
 
 	return (
-		<Item>
+		<Grid container width="49%">
 			<Typography color="rgb(5, 150, 255)" variant="h5">
 				{title}
 			</Typography>
 			<Item>{content}</Item>
-		</Item>
+		</Grid>
 	);
 };
 

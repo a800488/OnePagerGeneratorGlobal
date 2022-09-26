@@ -9,14 +9,15 @@ import Header from "./components/Header";
 import data from "./components/data";
 
 const App = () => {
-	const [state, setState] = useState(data);
 	const theme = createTheme();
-	const [croppedArea, setCroppedArea] = useState<any>("");
+
+	const [state, setState] = useState<Object>(data);
+	const [croppedArea, setCroppedArea] = useState<string>("");
 	const [image, setImage] = useState<string>("");
 
-	const updateText = (e: any, id: number, section: string) => {
+	const updateText = (e: string, id: number, section: string) => {
 		let newState: any = state;
-		newState[section].forEach((el: any) => {
+		newState[section].forEach((el: { id: number; content: string }) => {
 			if (el.id === id) {
 				el.content = e;
 			}
@@ -24,9 +25,13 @@ const App = () => {
 		setState({ ...newState });
 	};
 
-	const includeField = (e: any, id: number, section: string) => {
+	const includeField = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		id: number,
+		section: string
+	) => {
 		let newState: any = state;
-		newState[section].forEach((el: any) => {
+		newState[section].forEach((el: { id: number; shouldInclude: boolean }) => {
 			if (el.id === id) {
 				el.shouldInclude = !el.shouldInclude;
 			}
@@ -34,7 +39,7 @@ const App = () => {
 		setState({ ...newState });
 	};
 
-	const setAvatar = (croppedArea: any, image: any) => {
+	const setAvatar = (croppedArea: string, image: string) => {
 		setCroppedArea(croppedArea);
 		setImage(image);
 	};
@@ -43,15 +48,13 @@ const App = () => {
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<Header />
-
-			<Container component="main" sx={{ mb: 4 }}>
+			<Container component="main" sx={{ mb: 4, padding: 2 }}>
 				<UserForm
 					updateText={updateText}
 					state={state}
 					includeField={includeField}
 					setAvatar={setAvatar}
 				/>
-
 				<RenderedForm state={state} croppedArea={croppedArea} image={image} />
 			</Container>
 		</ThemeProvider>
