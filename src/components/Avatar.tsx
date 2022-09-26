@@ -38,9 +38,9 @@ const AvatarEdit = ({ getAvatar }: iAvatarEdit) => {
 	});
 
 	return (
-		<Grid container spacing={2} sx={{ mb: 4, mt: 4 }}>
+		<Grid container spacing={2} sx={{ mb: 1, mt: 1 }}>
 			<Grid position={"relative"} item xs={12}>
-				<div className="App">
+				<div className="image-container">
 					<div className="cropper">
 						<Cropper
 							image={image}
@@ -60,7 +60,7 @@ const AvatarEdit = ({ getAvatar }: iAvatarEdit) => {
 			</Grid>
 			<Grid position={"relative"} item xs={12}>
 				<Slider
-					sx={{ ml: 2, mr: 4 }}
+					sx={{ ml: 2, mr: 4, maxWidth: "300px", width: "100%" }}
 					value={zoom}
 					min={1}
 					max={3}

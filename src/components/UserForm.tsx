@@ -16,6 +16,9 @@ const UserForm = ({ updateText, state, includeField, setAvatar }: any) => {
 				gap={2}
 			>
 				<Grid container spacing={2} gap={2} justifyContent="center">
+					<Grid container md={4} item height="fit-content">
+						<AvatarEdit getAvatar={setAvatar} />
+					</Grid>
 					<Grid container md={7} item>
 						<Grid item xs={12} sx={{ mb: 0, mt: 0 }}>
 							{state.personalDetails.map(
@@ -45,10 +48,10 @@ const UserForm = ({ updateText, state, includeField, setAvatar }: any) => {
 						<Grid
 							container
 							className="include"
-							xs={12}
 							gap={2}
-							justifyContent="center"
+							xs={12}
 							item
+							justifyContent="space-between"
 						>
 							{state.skills.map(
 								(
@@ -87,9 +90,6 @@ const UserForm = ({ updateText, state, includeField, setAvatar }: any) => {
 								)
 							)}
 						</Grid>
-					</Grid>
-					<Grid container md={4} item height="fit-content">
-						<AvatarEdit getAvatar={setAvatar} />
 					</Grid>
 				</Grid>
 			</Grid>

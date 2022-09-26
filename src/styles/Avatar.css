@@ -1,10 +1,10 @@
 .cropper {
 	position: relative;
-	height: 50vh;
+	height: 200px;
 }
 
 .viewer {
-	height: 50vh;
+	height: 200px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
